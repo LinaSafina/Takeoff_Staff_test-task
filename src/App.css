@@ -1,4 +1,9 @@
-.App {
+main {
+  width: 40%;
+  margin: 5rem auto;
+}
+
+/* .App {
   text-align: center;
 }
 
@@ -36,4 +41,4 @@
   100% {
     transform: translateY(0px);
   }
-}
+} */

@@ -1,0 +1,14 @@
+{
+  "users": [
+    { "id": 1, "login": "user1", "password": "User1111" },
+    { "id": 2, "login": "user2", "password": "User2222" }
+  ],
+  "contacts": [
+    { "id": 1, "userId": 1, "name": "contact1", "phone": 79777777777 },
+    { "id": 2, "userId": 1, "name": "contact2", "phone": 79777777777 },
+    { "id": 3, "userId": 1, "name": "contact3", "phone": 79777777777 },
+    { "id": 4, "userId": 2, "name": "contact1", "phone": 79777777777 },
+    { "id": 5, "userId": 2, "name": "contact2", "phone": 79777777777 },
+    { "id": 6, "userId": 2, "name": "contact3", "phone": 79777777777 }
+  ]
+}
