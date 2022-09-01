@@ -2,14 +2,19 @@ import { LoginForm } from './components/Form/LoginForm';
 import './App.css';
 import { Route, Routes } from 'react-router-dom';
 import { Contacts } from './components/Contacts/Contacts';
+import { ErrorBoundary } from './components/ErrorBoundary';
+import { NotFound } from './components/NotFound';
 
 function App() {
   return (
     <main>
-      <Routes>
-        <Route path='/' element={<LoginForm />}></Route>
-        <Route path='contacts' element={<Contacts />}></Route>
-      </Routes>
+      <ErrorBoundary>
+        <Routes>
+          <Route path='/' element={<LoginForm />}></Route>
+          <Route path='contacts' element={<Contacts />}></Route>
+          <Route path='*' element={<NotFound />} />
+        </Routes>
+      </ErrorBoundary>
     </main>
   );
 }
