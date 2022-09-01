@@ -26,5 +26,13 @@
       "id": "5ZpLnna"
     }
   ],
-  "contacts": []
+  "contacts": [
+    {
+      "name": "Cucumbe",
+      "phone": "+7 777 777 7777",
+      "userId": "1",
+      "gender": "male",
+      "id": 2
+    }
+  ]
 }

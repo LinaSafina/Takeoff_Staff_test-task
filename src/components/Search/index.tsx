@@ -21,7 +21,7 @@ export const SearchInput = () => {
   );
 
   const searchHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const enteredValue = event.target.value.toLowerCase();
+    const enteredValue = event.target.value;
     setSearchValue(enteredValue);
     delayedSearchHandler(enteredValue);
   };
