@@ -20,12 +20,9 @@ function App() {
 }
 
 //TO-DO:
-
-// 2) useEffect for contacts, so that data would be downloaded each time
-
+// 0) search among Contacts
 // 4) unitTests
 // 5) ErrorBoundary and errors handling
-// 6) No route found path
 // 7) LazyLoading of contacts ?
 
 // 9) check files and make better structure

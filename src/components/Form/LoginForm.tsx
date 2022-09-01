@@ -30,27 +30,32 @@ export const LoginForm = () => {
     setIsPasswordShown((prevState) => !prevState);
   };
 
-  const submitFormHandler = (event: React.FormEvent<HTMLFormElement>) => {
+  const submitFormHandler = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
-    fetch(URLS.LOGIN, {
-      method: 'POST',
-      body: JSON.stringify({ email: login, password: password }),
-      headers: { 'Content-type': 'application/json' },
-    })
-      .then((response) => response.json())
-      .then((data) => {
-        dispatch(
-          loginUser({
-            token: data.accessToken,
-            userId: data.user.id,
-          })
-        );
-        navigate('contacts');
-      })
-      .catch((e) => {
-        alert(e);
+    try {
+      const response = await fetch(URLS.LOGIN, {
+        method: 'POST',
+        body: JSON.stringify({ email: login, password: password }),
+        headers: { 'Content-type': 'application/json' },
       });
+      const data = await response.json();
+
+      if (!response.ok) {
+        alert(data);
+        return;
+      }
+
+      dispatch(
+        loginUser({
+          token: data.accessToken,
+          userId: data.user.id,
+        })
+      );
+      navigate('contacts');
+    } catch (e) {
+      console.log(e);
+    }
   };
 
   return (

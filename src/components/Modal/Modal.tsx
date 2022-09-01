@@ -1,4 +1,5 @@
 import { useEffect } from 'react';
+import { createPortal } from 'react-dom';
 import {
   Button,
   Dialog,
@@ -17,9 +18,8 @@ import { useAppDispatch, useAppSelector } from '../../app/hooks';
 import { schema } from './schema-contact';
 import { selectAuth } from '../../app/authSlice';
 import { addContact, ContactType, editContact } from '../../app/contactsSlice';
-import { URLS } from '../constants';
+import { BUTTONS, URLS } from '../constants';
 import {
-  BUTTONS,
   DEFAULT_VALUES,
   DIALOG_TITLES,
   GENDERS,
@@ -93,11 +93,11 @@ export const Modal = ({
         setIsOpen(false);
       })
       .catch((e) => {
-        throw new Error(e.message);
+        console.log(e.message);
       });
   };
 
-  return (
+  return createPortal(
     <Dialog open={isOpen} onClose={modalCloseHandler}>
       <DialogTitle>
         {contactName ? DIALOG_TITLES.EDIT : DIALOG_TITLES.ADD}
@@ -157,6 +157,7 @@ export const Modal = ({
           </Button>
         </DialogActions>
       </form>
-    </Dialog>
+    </Dialog>,
+    document.body
   );
 };

@@ -11,7 +11,7 @@ import {
   ListItemText,
 } from '@mui/material';
 import DeleteIcon from '@mui/icons-material/Delete';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useSearchParams } from 'react-router-dom';
 import { AddCircleOutline, Edit } from '@mui/icons-material';
 import { useAppDispatch, useAppSelector } from '../../app/hooks';
 import {
@@ -21,23 +21,26 @@ import {
   selectContacts,
   setContacts,
 } from '../../app/contactsSlice';
-import { URLS } from '../constants';
+import { AVATARS, BUTTONS, URLS } from '../constants';
 import { LIST_OF_CONTACTS } from './constants';
 import { Modal } from '../Modal/Modal';
 import { logoutUser, selectAuth } from '../../app/authSlice';
 import './Contacts.css';
-import { DEFAULT_VALUES } from '../Modal/constants';
+import { DEFAULT_VALUES, GENDERS } from '../Modal/constants';
+import { SearchInput } from '../Search';
 
 const IMAGES_PATH = '/images';
 
 export const Contacts = () => {
-  const contacts = useAppSelector(selectContacts);
+  const allContacts = useAppSelector(selectContacts);
   const auth = useAppSelector(selectAuth);
   const dispatch = useAppDispatch();
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [editingContact, setEditingContact] =
     useState<ContactType>(DEFAULT_VALUES);
   const navigate = useNavigate();
+  const [searchParam, setSearchParam] = useSearchParams();
+  const [filteredContacts, setFilteredContacts] = useState(allContacts);
 
   useEffect(() => {
     if (!auth.userId) {
@@ -52,20 +55,35 @@ export const Contacts = () => {
           throw new Error(e.message);
         });
     }
-  }, [contacts]);
+  }, [allContacts]);
+
+  useEffect(() => {
+    const searchValue = searchParam.get('search');
+    if (!searchValue) {
+      setFilteredContacts(allContacts);
+    }
+
+    if (!!searchValue) {
+      const newContacts = allContacts.filter(
+        ({ name, phone }) =>
+          name.toLowerCase().includes(searchValue) ||
+          phone.toLowerCase().includes(searchValue)
+      );
+      setFilteredContacts(newContacts);
+    }
+  }, [searchParam]);
 
   const listOfContacts =
-    contacts.length !== 0 &&
-    contacts.map(({ name, phone, gender, id }: ContactType) => {
+    filteredContacts.length !== 0 &&
+    filteredContacts.map(({ name, phone, gender, id }: ContactType) => {
       return (
         <Fragment key={id}>
           <ListItem>
-            <form></form>
             <ListItemAvatar>
               <Avatar
                 alt={name}
                 src={`${IMAGES_PATH}/${
-                  gender === 'female' ? 'avatar1' : 'avatar2'
+                  gender === GENDERS.FEMALE ? AVATARS.FEMALE : AVATARS.MALE
                 }.jpg`}
                 sx={{ width: '4rem', height: '4rem' }}
               />
@@ -109,7 +127,7 @@ export const Contacts = () => {
           dispatch(deleteContact(id));
         })
         .catch((e) => {
-          throw new Error(e.message);
+          console.log(e.message);
         });
     }
   }
@@ -117,7 +135,9 @@ export const Contacts = () => {
   function editContactHandler(event: React.MouseEvent<HTMLButtonElement>) {
     if (event.currentTarget.type === 'button') {
       const id = event.currentTarget.dataset.id || '';
-      const contact = contacts.find((item: ContactType) => item.id === id);
+      const contact = filteredContacts.find(
+        (item: ContactType) => item.id == id
+      );
 
       if (contact) {
         setEditingContact(contact);
@@ -137,10 +157,7 @@ export const Contacts = () => {
   }
 
   return (
-    <>
-      <Button variant='contained' color='secondary' onClick={logoutHandler}>
-        Log out
-      </Button>
+    <div className='contacts-wrapper'>
       <Modal
         isOpen={isModalOpen}
         setIsOpen={setIsModalOpen}
@@ -148,6 +165,7 @@ export const Contacts = () => {
         setContact={setEditingContact}
       />
       <h1>{LIST_OF_CONTACTS}</h1>
+      <SearchInput />
       <List sx={{ width: '90%', maxWidth: 450 }}>{listOfContacts}</List>
       <IconButton
         color='primary'
@@ -157,6 +175,9 @@ export const Contacts = () => {
       >
         <AddCircleOutline fontSize='inherit' />
       </IconButton>
-    </>
+      <Button variant='contained' color='secondary' onClick={logoutHandler}>
+        {BUTTONS.LOG_OUT}
+      </Button>
+    </div>
   );
 };

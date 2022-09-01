@@ -52,6 +52,7 @@
     ]
   },
   "devDependencies": {
+    "@types/lodash.debounce": "^4.0.7",
     "json-server-auth": "^2.1.0"
   }
 }

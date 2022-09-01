@@ -26,5 +26,27 @@
       "id": "5ZpLnna"
     }
   ],
-  "contacts": []
+  "contacts": [
+    {
+      "name": "Cucumber2222",
+      "phone": "+7 777 777 7777",
+      "userId": "1",
+      "gender": "male",
+      "id": 2
+    },
+    {
+      "name": "Alina",
+      "phone": "+7 777 777 7777",
+      "userId": "1",
+      "gender": "male",
+      "id": 3
+    },
+    {
+      "name": "Lina",
+      "phone": "+7 777 777 7777",
+      "userId": "1",
+      "gender": "female",
+      "id": 4
+    }
+  ]
 }

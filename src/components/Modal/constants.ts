@@ -15,7 +15,7 @@ export const LABELS = {
   NAME: 'Name',
   PHONE: 'Phone number',
   MALE: 'Male',
-  FEMALE: 'FEmale',
+  FEMALE: 'Female',
 };
 
 export const DEFAULT_VALUES = {

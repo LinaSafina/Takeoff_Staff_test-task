@@ -2,7 +2,7 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { RootState } from './store';
 
 export type ContactType = {
-  id: string;
+  id: string | number;
   name: string;
   phone: string;
   gender: string;
