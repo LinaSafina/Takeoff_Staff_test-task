@@ -55,7 +55,7 @@ export const Contacts = () => {
           throw new Error(e.message);
         });
     }
-  }, [allContacts]);
+  }, []);
 
   useEffect(() => {
     const searchValue = searchParam.get('search');
@@ -71,7 +71,7 @@ export const Contacts = () => {
       );
       setFilteredContacts(newContacts);
     }
-  }, [searchParam]);
+  }, [searchParam, allContacts, setFilteredContacts]);
 
   const listOfContacts =
     filteredContacts.length !== 0 &&

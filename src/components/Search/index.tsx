@@ -17,7 +17,7 @@ export const SearchInput = () => {
 
         value ? setSearchParam({ search: value }) : setSearchParam({});
       }, 1000),
-    []
+    [searchParam, setSearchParam]
   );
 
   const searchHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
