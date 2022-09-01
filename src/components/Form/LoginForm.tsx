@@ -1,17 +1,20 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { Button, IconButton, InputAdornment, TextField } from '@mui/material';
 import Visibility from '@mui/icons-material/Visibility';
 import VisibilityOff from '@mui/icons-material/VisibilityOff';
-
+import { useAppDispatch } from '../../app/hooks';
+import { loginUser } from '../../app/authSlice';
 import { FORM_HEADING, IDS, LABELS, NAMES, SUBMIT_BUTTON } from './constants';
-import styles from './Form.module.css';
-import { useNavigate } from 'react-router-dom';
+import './LoginForm.css';
+import { URLS } from '../constants';
 
-export const Form = () => {
+export const LoginForm = () => {
   const [login, setLogin] = useState('');
   const [password, setPassword] = useState('');
   const [isPasswordShown, setIsPasswordShown] = useState(false);
   const navigate = useNavigate();
+  const dispatch = useAppDispatch();
 
   const loginChangeHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
     setLogin(event.target.value);
@@ -27,27 +30,31 @@ export const Form = () => {
     setIsPasswordShown((prevState) => !prevState);
   };
 
-  const submitFormHandler = async (event: React.FormEvent<HTMLFormElement>) => {
+  const submitFormHandler = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    const url = '/login';
 
-    try {
-      const response = await fetch(url, {
-        method: 'POST',
-        body: JSON.stringify({ email: login, password: password }),
-        headers: { 'Content-type': 'application/json' },
+    fetch(URLS.LOGIN, {
+      method: 'POST',
+      body: JSON.stringify({ email: login, password: password }),
+      headers: { 'Content-type': 'application/json' },
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        dispatch(
+          loginUser({
+            token: data.accessToken,
+            userId: data.user.id,
+          })
+        );
+        navigate('contacts');
+      })
+      .catch((e) => {
+        alert(e);
       });
-      const data = await response.json();
-      localStorage.setItem('token', data.accessToken);
-    } catch (e) {
-      console.log(e);
-    }
-
-    navigate('contacts');
   };
 
   return (
-    <form className={styles.form} onSubmit={submitFormHandler}>
+    <form className={'login-form'} onSubmit={submitFormHandler}>
       <h1>{FORM_HEADING}</h1>
       <TextField
         id={IDS.LOGIN}
@@ -82,7 +89,7 @@ export const Form = () => {
           ),
         }}
       ></TextField>
-      <Button variant='contained' type='submit'>
+      <Button variant='contained' type='submit' disabled={!login || !password}>
         {SUBMIT_BUTTON}
       </Button>
     </form>

@@ -1,0 +1,11 @@
+.MuiListItem-root {
+  align-items: center;
+  column-gap: 15px;
+}
+
+@media screen and (max-width: 768px) {
+  .MuiListItem-root {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}

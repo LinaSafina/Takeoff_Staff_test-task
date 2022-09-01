@@ -1,17 +1,23 @@
-import { configureStore, ThunkAction, Action } from '@reduxjs/toolkit';
-import counterReducer from '../features/counter/counterSlice';
+import { configureStore } from '@reduxjs/toolkit';
+import authReducer, { AuthState } from './authSlice';
+import contactsReducer, { ContactsState, ContactType } from './contactsSlice';
+import { authMiddleware } from './authMiddleware';
+import { getPreloadedUserData } from './getPreloadedData';
+
+const preloadedState = {
+  ...getPreloadedUserData(),
+  contacts: { contacts: [] },
+};
 
 export const store = configureStore({
   reducer: {
-    counter: counterReducer,
+    auth: authReducer,
+    contacts: contactsReducer,
   },
+  middleware: (getDefaultMiddleware) =>
+    getDefaultMiddleware().concat(authMiddleware),
+  preloadedState: preloadedState,
 });
 
 export type AppDispatch = typeof store.dispatch;
 export type RootState = ReturnType<typeof store.getState>;
-export type AppThunk<ReturnType = void> = ThunkAction<
-  ReturnType,
-  RootState,
-  unknown,
-  Action<string>
->;

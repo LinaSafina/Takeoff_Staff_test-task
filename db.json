@@ -1,14 +1,30 @@
 {
   "users": [
-    { "id": 1, "login": "user1", "password": "User1111" },
-    { "id": 2, "login": "user2", "password": "User2222" }
+    {
+      "email": "user1@gmail.com",
+      "password": "$2a$10$RDf0N4SoBCCptV12gGCn1Oh7eLYoFrpy7laUtZBbSGAbZs3QAsUHq",
+      "id": "1"
+    },
+    {
+      "email": "user2@gmail.com",
+      "password": "$2a$10$/beCDH.VQPbfk1P.YIb4Ae.FqIQboh4RLLn3j60aLL8wxPrig4/O.",
+      "id": "ml_4T2m"
+    },
+    {
+      "email": "user3@gmail.com",
+      "password": "$2a$10$Mr9TJoHHpAmPeApTOCrfAeryCurfbkvgHXx8jdGdbh07FuiCp1.g6",
+      "id": "qDgQeiv"
+    },
+    {
+      "email": "user4@gmail.com",
+      "password": "$2a$10$LmWhPYeZUJR0E41osAZkoOotHVrIom0uy8h4x/ykiSl/GT0P.puHu",
+      "id": "3ucVsG7"
+    },
+    {
+      "email": "user5@gmail.com",
+      "password": "$2a$10$/3vl5tfqFXYpLavGNtk7SeOe.xqDggJxesCK2ESMm59Pp8jVq9HC2",
+      "id": "5ZpLnna"
+    }
   ],
-  "contacts": [
-    { "id": 1, "userId": 1, "name": "contact1", "phone": 79777777777 },
-    { "id": 2, "userId": 1, "name": "contact2", "phone": 79777777777 },
-    { "id": 3, "userId": 1, "name": "contact3", "phone": 79777777777 },
-    { "id": 4, "userId": 2, "name": "contact1", "phone": 79777777777 },
-    { "id": 5, "userId": 2, "name": "contact2", "phone": 79777777777 },
-    { "id": 6, "userId": 2, "name": "contact3", "phone": 79777777777 }
-  ]
+  "contacts": []
 }
