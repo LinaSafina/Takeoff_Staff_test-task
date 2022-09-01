@@ -26,12 +26,6 @@ export const DEFAULT_VALUES = {
   id: '',
 };
 
-export const BUTTONS = {
-  CANCEL: 'Cancel',
-  ADD: 'Add',
-  SAVE: 'Save',
-};
-
 export const DIALOG_TITLES = {
   EDIT: 'Edit contact',
   ADD: 'Add contact',

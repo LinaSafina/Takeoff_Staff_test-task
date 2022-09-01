@@ -1,46 +1,40 @@
-# Getting Started with Create React App
+# Takeoff Staff, Тестовое задание
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app), using the [Redux](https://redux.js.org/) and [Redux Toolkit](https://redux-toolkit.js.org/) TS template.
+Приложение личный кабинет.
+В приложении две страницы:
 
-## Available Scripts
+1. Страница входа
+2. Страница со списком контактов (реализована возможность добавлять/удалять/редактировать контакты, а также доступен поиск).
 
-In the project directory, you can run:
+## Стек технологий
 
-### `npm start`
+- Приложение создано с помощью [CRA](https://github.com/facebook/create-react-app) (React 18), выполнено на TypeScript. Версия Node - **v16.13.2** (также указана в файле .nvmrc)
+- В качестве стейт менеджера использован [Redux](https://redux.js.org/) (с использованием [ReduxToolkit](https://redux-toolkit.js.org/)).
+- Использовалась UI-библиотека компонентов MUI.
+- для валидации форм использовались react-hook-form + yup.
+- поиск по списку контактов реализован с помощью lodash.debounce.
+- для реализации авторизации пользователя использованы запросы к моковым данным (json-server).
+- для написания Unit тестов использованы Jest + RTT.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+## Запуск приложения
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+1. склонировать к себе на компьютер ветку master и установить все зависимости (_npm i_)
 
-### `npm test`
+2. запустить приложение в режиме разработки - **npm start**. Открыть **http://localhost:3000** (страница входа в приложение) в браузере, если это не произошло автоматически.
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+3. в новом Терминале запустить JSON Server, вставив в терминал следующую команду (можно указать другой свободный порт вместо 3004) - **json-server db.json -m ./node_modules/json-server-auth --port 3004**
 
-### `npm run build`
+4. В приложении зарегистрировано несколько пользователей. Для входа в приложение можно использовать одни из следующих данных:
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+- логин - *user1@gmail.com*
+  пароль - _User1111_
+- логин - *user2@gmail.com*
+  пароль - _User2222_
+- логин - *user3@gmail.com*
+  пароль - _User3333_
+- логин - *user4@gmail.com*
+  пароль - _User4444_
+- логин - *user5@gmail.com*
+  пароль - _User5555_
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
+5. запустить тесты можно командой - **npm test**
