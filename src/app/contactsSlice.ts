@@ -44,20 +44,11 @@ export const contactsSlice = createSlice({
     setContacts: (state, action: PayloadAction<ContactsType>) => {
       state.contacts = action.payload;
     },
-
-    clearContacts: (state) => {
-      state.contacts = [];
-    },
   },
 });
 
-export const {
-  addContact,
-  editContact,
-  deleteContact,
-  setContacts,
-  clearContacts,
-} = contactsSlice.actions;
+export const { addContact, editContact, deleteContact, setContacts } =
+  contactsSlice.actions;
 
 export const selectContacts = (state: RootState) => state.contacts.contacts;
 
