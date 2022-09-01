@@ -35,7 +35,10 @@ export const contactsSlice = createSlice({
     },
 
     deleteContact: (state, action: PayloadAction<string>) => {
-      state.contacts.filter((contact) => contact.id !== action.payload);
+      state.contacts.splice(
+        state.contacts.findIndex((contact) => contact.id === action.payload),
+        1
+      );
     },
 
     setContacts: (state, action: PayloadAction<ContactsType>) => {
